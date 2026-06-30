@@ -13,6 +13,6 @@ class TuiManager() {
 
         if (buildCanvas) sBuilder.canvas()
         
-        println("\u001B[41m${sBuilder.stringBuilder}")
+        println(sBuilder.stringBuilder)
     }
 }
