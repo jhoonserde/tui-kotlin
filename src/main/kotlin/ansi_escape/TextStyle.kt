@@ -2,23 +2,36 @@ package ansi_escape
 
 import java.awt.Color
 
-object TextStyle {
+class TextStyle(
+    var _stylish: String = "",
+    val stylish: String = _stylish
+) {
 
-    private const val ESC = "\u001B["
+    fun resetStyle() {
+        _stylish += AnsiEscape.TextStyle.RESET_STYLE
+    }
 
-    val RESET_STYLE = "${ESC}0m"
+    fun bold() {
+        _stylish += AnsiEscape.TextStyle.BOLD
+    }
 
-    val BOLD = "${ESC}1m"
-        
-    val ITALIC = "${ESC}3m"
-        
-    val UNDERLINE = "${ESC}4m"
-        
-    val STRIKETHROUGH = "${ESC}9m"
+    fun italic() {
+        _stylish += AnsiEscape.TextStyle.ITALIC
+    }
 
-    fun fgColor(color: Color) =
-        "${ESC}38;2;${color.red};${color.green};${color.blue}m"
-        
-    fun bgColor(color: Color) =
-        "${ESC}48;2;${color.red};${color.green};${color.blue}m"
+    fun underLine() {
+        _stylish += AnsiEscape.TextStyle.UNDERLINE
+    }
+
+    fun strikeThrough() {
+        _stylish += AnsiEscape.TextStyle.STRIKETHROUGH
+    }
+
+    fun fgColor(color: Color) {
+        _stylish += AnsiEscape.TextStyle.fgColor(color)
+    }
+
+    fun bgColor(color: Color) {
+        _stylish += AnsiEscape.TextStyle.bgColor(color)
+    }
 }
