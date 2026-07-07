@@ -1,8 +1,9 @@
 package layout
 
-import ansi_escape.CursorNavigation
+import ansi_escape.CursorNav
 import ansi_escape.TextStyle
 import java.awt.Color
+import Position
 import TermManager
 
 open class SBuilder(
@@ -11,55 +12,67 @@ open class SBuilder(
 
     private val termManager: TermManager = TermManager(),
 
-    private val cursorNavigation: CursorNavigation = CursorNavigation
+    private val cursorNav: CursorNav = CursorNav()
 ) {
 
 
-    fun canvas(charCanvas: Char = ' '): SBuilder {
+    fun canvas(charCanvas: Char = ' ') {
 
         val (heigth, width) = termManager.getTerminalDimension()
-        
+
         val areaDimension = heigth.times(width)
-        
+
         val charToString = charCanvas.toString()
-        
-        stringBuilder.append(charToString.repeat(areaDimension))
-        return this
+
+        stringBuilder.insert(0, charToString.repeat(areaDimension))
     }
 
 
-    fun layout(type: SBuilder, content: (SBuilder) -> SBuilder): SBuilder {
+    fun layout(type: SBuilder, content: (SBuilder) -> SBuilder) {
+        
         val contentStringBuilder = content(type).stringBuilder
         stringBuilder.append(contentStringBuilder)
-        return this
     }
 
 
     fun text(
         text: String,
+        position: Position,
         italic: Boolean = false,
         bold: Boolean = false,
         underLine: Boolean = false,
         fgColor: Color = Color.WHITE,
         bgColor: Color = Color(0, 0, 0, 0),
         strikeThrough: Boolean = false
-    ): SBuilder {
+    ) {
 
-        val textStyle: TextStyle = TextStyle
-        var stylist = textStyle.fgColor(fgColor) + textStyle.bgColor(bgColor)
+        val navCursorToLine: CursorNav = CursorNav()
+        navCursorToLine.apply {
+            saveCursor()
+            hideCursor()
+            moveTo(position)
+        }
 
-        if (italic) stylist += textStyle.ITALIC
-        if (bold) stylist += textStyle.BOLD
-        if (underLine) stylist += textStyle.UNDERLINE
-        if (strikeThrough) stylist += textStyle.STRIKETHROUGH
+        val navCursorBack: CursorNav = CursorNav()
+        navCursorBack.apply {
+            restoreCursor()
+            showCursor()
+        }
 
-        stringBuilder.append(stylist + text + textStyle.RESET_STYLE)
-        return this
-    }
+        val textStyle: TextStyle = TextStyle()
+        textStyle.apply {
+            fgColor(fgColor)
+            bgColor(bgColor)
+            if (italic) italic()
+            if (bold) bold()
+            if (underLine) underLine()
+            if (strikeThrough) strikeThrough()
+        }
 
-
-    fun spacer(distance: Int): SBuilder {
-        stringBuilder.append("\n".repeat(distance))
-        return this
+        stringBuilder.append(
+            navCursorToLine.cursorInstruc +
+            (textStyle.stylish + text) +
+            navCursorBack.cursorInstruc
+        )
     }
 }
