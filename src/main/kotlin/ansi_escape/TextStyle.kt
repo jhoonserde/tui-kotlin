@@ -2,11 +2,10 @@ package ansi_escape
 
 import java.awt.Color
 
-class TextStyle(
-    var _stylish: String = "",
-    val stylish: String = _stylish
-) {
+class TextStyle(private var _stylish: String = String()) {
 
+    val stylish: String by lazy { _stylish }
+    
     fun resetStyle() {
         _stylish += AnsiEscape.TextStyle.RESET_STYLE
     }

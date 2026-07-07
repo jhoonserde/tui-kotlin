@@ -2,11 +2,10 @@ package ansi_escape
 
 import Position
 
-class CursorNav(
-    var _cursorInstruc: String = "",
-    val cursorInstruc: String = _cursorInstruc
-) {
+class CursorNav(private var _cursorInstruc: String = String()) {
 
+    val cursorInstruc: String by lazy { _cursorInstruc }
+    
     fun saveCursor() {
         _cursorInstruc += AnsiEscape.CursorNav.SAVE_CURSOR
     }
