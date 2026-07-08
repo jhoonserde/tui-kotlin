@@ -3,16 +3,13 @@ package layout
 import ansi_escape.CursorNav
 import ansi_escape.TextStyle
 import java.awt.Color
-import Position
+import types.Offset
 import TermManager
-import builder.Builder
-import builder.components.Text
+import builder.component.Text
 
 open class SBuilder(
 
     open val stringBuilder: StringBuilder = StringBuilder(),
-
-    private val builder: Builder = Builder(),
 
     private val termManager: TermManager = TermManager(),
 
@@ -21,8 +18,12 @@ open class SBuilder(
 ) {
 
 
-    fun canvas(char: Char = ' ') {
-        stringBuilder.insert(0, builder.buildCanvas(char))
+    fun canvas(charCanvas: Char = ' ') {
+
+        val (heigth, width) = termManager.getTerminalDimension()
+
+        val canvas = charCanvas.toString().repeat(heigth.times(width))
+        stringBuilder.insert(0, canvas)
     }
 
 
@@ -35,7 +36,7 @@ open class SBuilder(
 
     fun text(
         textString: String,
-        position: Position,
+        offset: Offset,
         italic: Boolean = false,
         bold: Boolean = false,
         underLine: Boolean = false,
@@ -43,18 +44,16 @@ open class SBuilder(
         bgColor: Color = Color(0, 0, 0, 0),
         strikeThrough: Boolean = false
     ) {
-        val text = builder.buildText(
-            Text(
-                textString = textString,
-                position = position,
-                italic = italic,
-                bold = bold,
-                underLine = underLine,
-                fgColor = fgColor,
-                bgColor = bgColor,
-                strikeThrough = strikeThrough
-            )
+        val text = Text(
+            textString = textString,
+            offset = offset,
+            italic = italic,
+            bold = bold,
+            underLine = underLine,
+            fgColor = fgColor,
+            bgColor = bgColor,
+            strikeThrough = strikeThrough
         )
-        stringBuilder.append(text)
+        stringBuilder.append(text.buildText())
     }
 }

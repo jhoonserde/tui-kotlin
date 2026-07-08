@@ -1,6 +1,6 @@
 package ansi_escape
 
-import Position
+import types.Offset
 import java.awt.Color
 
 object AnsiEscape {
@@ -21,8 +21,8 @@ object AnsiEscape {
     
         const val CLEAR = "${ESC}2J"
 
-        fun moveTo(position: Position): String {
-            return "${ESC}${position.row};${position.col}H"
+        fun moveTo(offset: Offset): String {
+            return "${ESC}${offset.row};${offset.col}H"
         }
     }
 

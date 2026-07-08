@@ -1,6 +1,6 @@
 package ansi_escape
 
-import Position
+import types.Offset
 
 class CursorNav(private var _cursorInstruc: String = String()) {
 
@@ -30,7 +30,7 @@ class CursorNav(private var _cursorInstruc: String = String()) {
         _cursorInstruc += AnsiEscape.CursorNav.CLEAR
     }
 
-    fun moveTo(position: Position) {
-        _cursorInstruc += AnsiEscape.CursorNav.moveTo(position)
+    fun moveTo(offset: Offset) {
+        _cursorInstruc += AnsiEscape.CursorNav.moveTo(offset)
     }
 }

@@ -1,5 +1,6 @@
 import TuiManager
 import layout.*
+import types.Offset
 
 fun main() {
 
@@ -7,7 +8,7 @@ fun main() {
     homeScreen.apply {
         text(
             textString = "Hello Im Jhoon",
-            position = Position(2,4) 
+            offset = Offset(2,4)
         )
     }
 
