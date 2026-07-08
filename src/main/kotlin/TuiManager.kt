@@ -3,16 +3,15 @@ import layout.SBuilder
 
 class TuiManager() {
 
-    fun sysWrite(
+    fun write(
         sBuilder: SBuilder,
         clearScreen: Boolean = true,
         buildCanvas: Boolean = true,
     ) {
-        
-        if (clearScreen) TermManager().clearScreen()
 
+        if (clearScreen) TermManager().clearScreen()
         if (buildCanvas) sBuilder.canvas()
-        
+
         println(sBuilder.stringBuilder)
     }
 }

@@ -4,10 +4,13 @@ import layout.*
 fun main() {
 
     val homeScreen = SBuilder()
-    homeScreen
-        .text("Hello Im Jhoon")
-        .spacer(2)
+    homeScreen.apply {
+        text(
+            textString = "Hello Im Jhoon",
+            position = Position(2,4) 
+        )
+    }
 
     val tuiManager = TuiManager()
-    tuiManager.sysWrite(homeScreen)
+    tuiManager.write(homeScreen)
 }

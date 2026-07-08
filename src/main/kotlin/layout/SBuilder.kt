@@ -5,26 +5,24 @@ import ansi_escape.TextStyle
 import java.awt.Color
 import Position
 import TermManager
+import builder.Builder
+import builder.components.Text
 
 open class SBuilder(
 
     open val stringBuilder: StringBuilder = StringBuilder(),
 
+    private val builder: Builder = Builder(),
+
     private val termManager: TermManager = TermManager(),
 
     private val cursorNav: CursorNav = CursorNav()
+
 ) {
 
 
-    fun canvas(charCanvas: Char = ' ') {
-
-        val (heigth, width) = termManager.getTerminalDimension()
-
-        val areaDimension = heigth.times(width)
-
-        val charToString = charCanvas.toString()
-
-        stringBuilder.insert(0, charToString.repeat(areaDimension))
+    fun canvas(char: Char = ' ') {
+        stringBuilder.insert(0, builder.buildCanvas(char))
     }
 
 
@@ -36,7 +34,7 @@ open class SBuilder(
 
 
     fun text(
-        text: String,
+        textString: String,
         position: Position,
         italic: Boolean = false,
         bold: Boolean = false,
@@ -45,34 +43,18 @@ open class SBuilder(
         bgColor: Color = Color(0, 0, 0, 0),
         strikeThrough: Boolean = false
     ) {
-
-        val navCursorToLine: CursorNav = CursorNav()
-        navCursorToLine.apply {
-            saveCursor()
-            hideCursor()
-            moveTo(position)
-        }
-
-        val navCursorBack: CursorNav = CursorNav()
-        navCursorBack.apply {
-            restoreCursor()
-            showCursor()
-        }
-
-        val textStyle: TextStyle = TextStyle()
-        textStyle.apply {
-            fgColor(fgColor)
-            bgColor(bgColor)
-            if (italic) italic()
-            if (bold) bold()
-            if (underLine) underLine()
-            if (strikeThrough) strikeThrough()
-        }
-
-        stringBuilder.append(
-            navCursorToLine.cursorInstruc +
-            (textStyle.stylish + text) +
-            navCursorBack.cursorInstruc
+        val text = builder.buildText(
+            Text(
+                textString = textString,
+                position = position,
+                italic = italic,
+                bold = bold,
+                underLine = underLine,
+                fgColor = fgColor,
+                bgColor = bgColor,
+                strikeThrough = strikeThrough
+            )
         )
+        stringBuilder.append(text)
     }
 }
