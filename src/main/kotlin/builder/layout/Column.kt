@@ -4,12 +4,18 @@ import TermManager
 
 class Column(
 
-    override val border: Border = Border(),
-
     override val stringBuilder: StringBuilder = StringBuilder(),
 
     private val termManager: TermManager = TermManager(),
 
-) : SBuilder(stringBuilder), Layout {
+) : Layout {
+
+    override fun canvas(charCanvas: Char) {
+
+        val (heigth, width) = termManager.getTerminalDimension()
+
+        val canvas = charCanvas.toString().repeat(heigth.times(width))
+        stringBuilder.insert(0, canvas)
+    }
 
 }

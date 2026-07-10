@@ -1,6 +1,7 @@
 import TuiManager
 import layout.*
 import types.Offset
+import java.awt.Color
 
 fun main() {
 
@@ -8,7 +9,8 @@ fun main() {
     homeScreen.apply {
         text(
             textString = "Hello Im Jhoon",
-            offset = Offset(2,4)
+            offset = Offset(2,4),
+            bgColor = Color(255, 64, 0) 
         )
     }
 

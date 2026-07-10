@@ -2,5 +2,7 @@ package layout
 
 interface Layout {
 
-    val border: Border
+    val stringBuilder: StringBuilder
+
+    fun canvas(charCanvas: Char)
 }

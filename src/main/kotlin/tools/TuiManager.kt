@@ -1,17 +1,18 @@
 import TermManager
+import layout.Layout
 import layout.SBuilder
 
 class TuiManager() {
 
     fun write(
-        sBuilder: SBuilder,
+        layout: Layout,
         clearScreen: Boolean = true,
         buildCanvas: Boolean = true,
     ) {
 
         if (clearScreen) TermManager().clearScreen()
-        if (buildCanvas) sBuilder.canvas()
+        if (buildCanvas) layout.canvas(' ')
 
-        println(sBuilder.stringBuilder)
+        println(layout.stringBuilder)
     }
 }

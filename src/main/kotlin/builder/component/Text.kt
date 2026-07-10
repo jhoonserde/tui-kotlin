@@ -6,7 +6,7 @@ import java.awt.Color
 import types.Offset
 import TermManager
 
-class Text(
+internal class Text(
 
     val textString: String,
 

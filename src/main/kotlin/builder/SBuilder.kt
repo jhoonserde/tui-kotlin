@@ -7,18 +7,18 @@ import types.Offset
 import TermManager
 import builder.component.Text
 
-open class SBuilder(
+class SBuilder(
 
-    open val stringBuilder: StringBuilder = StringBuilder(),
+    override val stringBuilder: StringBuilder = StringBuilder(),
 
     private val termManager: TermManager = TermManager(),
 
     private val cursorNav: CursorNav = CursorNav()
 
-) {
+) : Layout {
 
 
-    fun canvas(charCanvas: Char = ' ') {
+    override fun canvas(charCanvas: Char) {
 
         val (heigth, width) = termManager.getTerminalDimension()
 

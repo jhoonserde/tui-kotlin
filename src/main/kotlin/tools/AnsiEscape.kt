@@ -3,7 +3,7 @@ package ansi_escape
 import types.Offset
 import java.awt.Color
 
-object AnsiEscape {
+internal object AnsiEscape {
 
     private const val ESC = "\u001B["
 
