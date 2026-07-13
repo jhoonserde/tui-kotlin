@@ -26,6 +26,10 @@ class CursorNav(private var _cursorInstruc: String = String()) {
         _cursorInstruc += AnsiEscape.CursorNav.SHOW_CURSOR
     }
 
+    fun backToHome() {
+        _cursorInstruc += AnsiEscape.CursorNav.BACK_TO_HOME
+    }
+
     fun clear() {
         _cursorInstruc += AnsiEscape.CursorNav.CLEAR
     }

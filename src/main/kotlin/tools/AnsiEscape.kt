@@ -18,6 +18,8 @@ internal object AnsiEscape {
         const val HIDE_CURSOR = "${ESC}?25l"
 
         const val SHOW_CURSOR = "${ESC}?25h"
+
+        const val BACK_TO_HOME = "${ESC}H"
     
         const val CLEAR = "${ESC}2J"
 
