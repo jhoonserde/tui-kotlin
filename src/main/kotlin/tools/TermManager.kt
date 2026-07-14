@@ -1,44 +1,66 @@
+import ansi_escape.*
+import types.Offset
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStream
 
-class TermManager() {
+class TermManager(
+
+    val tty: File = File("/dev/tty"),
+
+) {
 
 //    Method to get size terminal dimensions
     fun getTerminalDimension(): Pair<Int, Int> {
 
-        /**
-         * Run command stty size to get terminal dimensions.
-         * but subprocess need access to terminal /dev/tty (current active terminal).
-         * so stdin is redirected there before the process start.
-         * */
-        val process = ProcessBuilder("stty", "size")
-            .redirectInput(File("/dev/tty")).start()
+        val outputStream = FileOutputStream(tty)
 
-        /**
-         * Return the input stream connected to the normal output of the subprocess.
-         * The returned input stream to be buffered and read it as String
-         * */
-        val output = process.inputStream.bufferedReader().readText().trim()
-        
-        val dimensions = output.split(" ")
-        
+        val inputStream = FileInputStream(tty)
+
+        val navCursor = CursorNav()
+        navCursor.apply {
+            clear()
+            hideCursor()
+            saveCursor()
+            moveTo(Offset(9999, 9999))
+            requestCursor()
+        }
+
         try {
 
-            if (output.isBlank()) {
-                throw TermManagerException("output dimensions is blank")
-            }
+            stty("raw", "-echo")
+            
+            outputStream.write(navCursor.cursorInstruc.toByteArray())
 
-            if (dimensions.size != 2) {
-                throw TermManagerException("") 
-            }
-        } catch (e: TermManagerException) {
-            println("Failed to get dimensions of terminal")
+        } finally {
+            stty("sane")
+            outputStream.close()
+            inputStream.close()
         }
-        return Pair(dimensions[0].toInt(), dimensions[1].toInt())
+
+        return Pair(20, 30)
+    }
+
+    fun stty(vararg args: String): InputStream {
+        val process = ProcessBuilder("stty", *args)
+            .redirectInput(tty)
+            .inheritIO()
+            .start()
+
+        return process.inputStream
     }
 
     fun clearScreen() {
+        val cursorNav = CursorNav()
+        cursorNav.apply {
+            backToHome()
+            clear()
+        }
 
-        print("\u001b[H\u001b[2J")
+        System.out.write(
+            cursorNav.cursorInstruc.toByteArray()
+        )
 
         System.out.flush()
     }
