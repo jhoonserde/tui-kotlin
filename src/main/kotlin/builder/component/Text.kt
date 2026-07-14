@@ -5,6 +5,8 @@ import ansi_escape.TextStyle
 import java.awt.Color
 import types.Offset
 import TermManager
+import RawContent
+import sun.awt.resources.awt_de
 
 internal class Text(
 
@@ -26,7 +28,7 @@ internal class Text(
 ) {
 
 
-    fun buildText(): String {
+    fun buildText(): RawContent {
 
         val navCursorToLine: CursorNav = CursorNav()
         navCursorToLine.apply {
@@ -51,8 +53,9 @@ internal class Text(
             if (strikeThrough) strikeThrough()
         }
 
-        return navCursorToLine.cursorInstruc +
-            (textStyle.stylish + textString) +
-            navCursorBack.cursorInstruc
+        return RawContent()
+            .add(navCursorToLine.cursorInstruc)
+            .add(textStyle.stylish + textString)
+            .add(navCursorBack.cursorInstruc)
     }
 }
