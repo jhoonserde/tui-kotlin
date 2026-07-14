@@ -7,6 +7,7 @@ fun main() {
 
     val homeScreen = SBuilder()
     homeScreen.apply {
+        border()
         text(
             textString = "Hello Im Jhoon",
             offset = Offset(2,4),

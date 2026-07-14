@@ -6,6 +6,7 @@ import java.awt.Color
 import types.Offset
 import TermManager
 import builder.component.Text
+import builder.component.*
 
 class SBuilder(
 
@@ -33,6 +34,12 @@ class SBuilder(
         stringBuilder.append(contentStringBuilder)
     }
 
+    fun border(charLine: Char = '#') {
+        val border = Border(charLine)
+        stringBuilder.append(
+            border.buildHorizontalLine()
+        )
+    }
 
     fun text(
         textString: String,
