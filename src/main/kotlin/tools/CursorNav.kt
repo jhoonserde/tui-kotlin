@@ -1,6 +1,5 @@
-package ansi_escape
 
-import types.Offset
+import Offset
 
 class CursorNav(private var _cursorInstruc: String = String()) {
 

@@ -1,10 +1,14 @@
-package layout
 
 import TermManager
+import Layer
+import Text
+import Layout 
+import java.awt.Color
+import Offset
 
 class Column(
 
-    override val stringBuilder: StringBuilder = StringBuilder(),
+    override val layer: Layer = Layer(),
 
     private val termManager: TermManager = TermManager(),
 
@@ -15,7 +19,30 @@ class Column(
         val (heigth, width) = termManager.getTerminalDimension()
 
         val canvas = charCanvas.toString().repeat(heigth.times(width))
-        stringBuilder.insert(0, canvas)
+        layer.stringLayer.insert(0, canvas)
+    }
+
+    fun text(
+        textString: String,
+        offset: Offset,
+        italic: Boolean = false,
+        bold: Boolean = false,
+        underLine: Boolean = false,
+        fgColor: Color = Color.WHITE,
+        bgColor: Color = Color(0, 0, 0, 0),
+        strikeThrough: Boolean = false
+    ) {
+        val text = Text(
+            textString = textString,
+            offset = offset,
+            italic = italic,
+            bold = bold,
+            underLine = underLine,
+            fgColor = fgColor,
+            bgColor = bgColor,
+            strikeThrough = strikeThrough
+        ).buildText()
+        layer.stringLayer.append(text.content)
     }
 
 }

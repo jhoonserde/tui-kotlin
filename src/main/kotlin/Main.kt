@@ -1,16 +1,16 @@
 import TuiManager
-import layout.*
-import types.Offset
+import Column
+import Offset
 import java.awt.Color
 
 fun main() {
 
-    val homeScreen = SBuilder()
+    val homeScreen = Column()
     homeScreen.apply {
         text(
             textString = "Hello Im Jhoon",
             offset = Offset(2,4),
-            bgColor = Color(255, 64, 0) 
+            bgColor = Color(255, 64, 0)
         )
     }
 

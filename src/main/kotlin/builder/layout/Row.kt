@@ -1,10 +1,9 @@
-package layout
 
 import TermManager 
 
 class Row(
 
-    override val stringBuilder: StringBuilder = StringBuilder(),
+    override val layer: Layer,
 
     private val termManager: TermManager = TermManager(),
 
@@ -15,7 +14,7 @@ class Row(
         val (heigth, width) = termManager.getTerminalDimension()
 
         val canvas = charCanvas.toString().repeat(heigth.times(width))
-        stringBuilder.insert(0, canvas)
+        layer.stringLayer.insert(0, canvas)
     }
 
 }

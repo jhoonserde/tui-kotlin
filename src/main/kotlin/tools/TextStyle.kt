@@ -1,4 +1,3 @@
-package ansi_escape
 
 import java.awt.Color
 

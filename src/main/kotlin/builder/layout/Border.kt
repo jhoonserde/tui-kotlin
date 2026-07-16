@@ -1,4 +1,3 @@
-package layout
 
 import TermManager
 

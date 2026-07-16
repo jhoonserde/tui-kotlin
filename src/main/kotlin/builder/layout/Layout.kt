@@ -1,8 +1,9 @@
-package layout
+
+import Layer
 
 interface Layout {
 
-    val stringBuilder: StringBuilder
+    val layer: Layer
 
     fun canvas(charCanvas: Char)
 }

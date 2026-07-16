@@ -1,6 +1,5 @@
-package ansi_escape
 
-import types.Offset
+import Offset
 import java.awt.Color
 
 internal object AnsiEscape {

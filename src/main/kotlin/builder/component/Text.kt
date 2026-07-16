@@ -1,12 +1,10 @@
-package builder.component
 
-import ansi_escape.CursorNav
-import ansi_escape.TextStyle
+import CursorNav
+import TextStyle
 import java.awt.Color
-import types.Offset
+import Offset
 import TermManager
 import RawContent
-import sun.awt.resources.awt_de
 
 internal class Text(
 

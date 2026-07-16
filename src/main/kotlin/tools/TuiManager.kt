@@ -1,6 +1,5 @@
 import TermManager
-import layout.Layout
-import layout.SBuilder
+import Layout
 
 class TuiManager() {
 
@@ -13,6 +12,6 @@ class TuiManager() {
         if (clearScreen) TermManager().clearScreen()
         if (buildCanvas) layout.canvas(' ')
 
-        println(layout.stringBuilder)
+        println(layout.layer.stringLayer)
     }
 }
