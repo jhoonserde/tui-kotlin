@@ -1,5 +1,5 @@
 
-import CursorNav
+import Cursor
 import TextStyle
 import java.awt.Color
 import Offset
@@ -28,14 +28,14 @@ internal class Text(
 
     fun buildText(): RawContent {
 
-        val navCursorToLine: CursorNav = CursorNav()
+        val navCursorToLine: Cursor = Cursor()
         navCursorToLine.apply {
             saveCursor()
             hideCursor()
             moveTo(offset)
         }
 
-        val navCursorBack: CursorNav = CursorNav()
+        val navCursorBack: Cursor = Cursor()
         navCursorBack.apply {
             restoreCursor()
             showCursor()
