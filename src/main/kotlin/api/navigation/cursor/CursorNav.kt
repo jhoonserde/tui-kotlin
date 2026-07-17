@@ -4,7 +4,7 @@ import Offset
 class CursorNav(private var _cursorInstruc: String = String()) {
 
     val cursorInstruc: String by lazy { _cursorInstruc }
-    
+
     fun saveCursor() {
         _cursorInstruc += AnsiEscape.CursorNav.SAVE_CURSOR
     }
