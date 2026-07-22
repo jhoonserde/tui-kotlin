@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.3.0"
 }
 
-group = "org.trashcollection01.tuikotlin"
+group = "net.joohnserde.tui.kotlin"
 version = "1.0-SNAPSHOT"
 
 repositories {

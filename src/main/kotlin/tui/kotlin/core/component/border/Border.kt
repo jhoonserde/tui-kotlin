@@ -1,6 +1,6 @@
-package layout
+package tui.kotlin.component
 
-import TermManager
+import tui.kotlin.TermManager
 
 class Border(
 
@@ -9,11 +9,11 @@ class Border(
     val charVertical: String,
 
     val charTopLeft: String,
-    
+
     val charTopRight: String,
-    
+
     val charBottomLeft: String,
-    
+
     val charBottomRight: String,
 ) {
 
@@ -22,7 +22,7 @@ class Border(
     val termDimension = TermManager().getTerminalDimension()
 
     val heigth = termDimension.first
-    
+
     val width = termDimension.second
 
     val areaDimension = heigth.times(width)
@@ -30,16 +30,16 @@ class Border(
     /*fun verticalBorderLine(singleLine: Boolean?): StringBuilder {
 
         val sbLine: StringBuilder = StringBuilder()
-        
+
         return sbLine
     } */
 
     fun horizontalBorderLine(singleLine: Boolean?): StringBuilder {
 
         val sbLine: StringBuilder = StringBuilder()
-        
+
         var tempWidth: Int = width - 1
-        
+
         while (!tempWidth.equals(1) && tempWidth <= width) {
             sbLine.append(charHorizontal)
             tempWidth--

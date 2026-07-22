@@ -1,9 +1,9 @@
-package ansi_escape
+package tui.kotlin
 
-import Position
+import tui.kotlin.Offset
 import java.awt.Color
 
-object AnsiEscape {
+internal object AnsiEscape {
 
     private const val ESC = "\u001B["
 
@@ -21,8 +21,8 @@ object AnsiEscape {
     
         const val CLEAR = "${ESC}2J"
 
-        fun moveTo(position: Position): String {
-            return "${ESC}${position.row};${position.col}H"
+        fun moveTo(offset: Offset): String {
+            return "${ESC}${offset.row};${offset.col}H"
         }
     }
 
