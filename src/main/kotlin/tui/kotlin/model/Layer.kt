@@ -1,6 +1,6 @@
+package tui.kotlin
 
-
-import Offset
+import tui.kotlin.Offset
 
 class Layer {
 

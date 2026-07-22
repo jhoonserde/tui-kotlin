@@ -1,10 +1,11 @@
+package tui.kotlin.layout
 
-import TermManager
-import Layer
-import Text
-import Layout 
+import tui.kotlin.TermManager
+import tui.kotlin.Layer
+import tui.kotlin.component.Text
+import tui.kotlin.layout.Layout
 import java.awt.Color
-import Offset
+import tui.kotlin.Offset
 
 class Column(
 

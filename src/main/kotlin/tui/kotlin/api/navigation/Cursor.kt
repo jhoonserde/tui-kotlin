@@ -1,4 +1,7 @@
-import CursorControl
+package tui.kotlin.navigation
+
+import tui.kotlin.navigation.*
+import tui.kotlin.Offset
 
 class Cursor {
 

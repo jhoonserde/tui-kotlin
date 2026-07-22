@@ -1,5 +1,7 @@
+package tui.kotlin.layout
 
-import TermManager 
+import tui.kotlin.TermManager
+import tui.kotlin.Layer 
 
 class Row(
 

@@ -1,3 +1,4 @@
+package tui.kotlin
 
 internal class RawContent(val content: String) {
 

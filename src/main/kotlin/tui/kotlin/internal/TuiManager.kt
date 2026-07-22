@@ -1,5 +1,7 @@
-import TermManager
-import Layout
+package tui.kotlin
+
+import tui.kotlin.TermManager
+import tui.kotlin.layout.Layout
 
 class TuiManager() {
 

@@ -1,5 +1,7 @@
+package tui.kotlin.navigation
 
-import Offset
+import tui.kotlin.Offset
+import tui.kotlin.AnsiEscape 
 
 internal class CursorControl(private var _cursorInstruc: StringBuilder) {
 

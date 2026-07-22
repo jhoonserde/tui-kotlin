@@ -1,10 +1,11 @@
+package tui.kotlin.component
 
-import Cursor
-import TextStyle
+import tui.kotlin.navigation.Cursor
+import tui.kotlin.component.TextStyle
 import java.awt.Color
-import Offset
-import TermManager
-import RawContent
+import tui.kotlin.Offset
+import tui.kotlin.TermManager
+import tui.kotlin.RawContent
 
 internal class Text(
 

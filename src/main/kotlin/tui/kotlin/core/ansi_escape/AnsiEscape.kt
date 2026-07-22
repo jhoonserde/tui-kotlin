@@ -1,5 +1,6 @@
+package tui.kotlin
 
-import Offset
+import tui.kotlin.Offset
 import java.awt.Color
 
 internal object AnsiEscape {

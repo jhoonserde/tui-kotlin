@@ -1,5 +1,6 @@
+package tui.kotlin.layout
 
-import Layer
+import tui.kotlin.Layer
 
 interface Layout {
 
