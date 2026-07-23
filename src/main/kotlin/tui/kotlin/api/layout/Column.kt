@@ -24,13 +24,15 @@ class Column(
         layer.stringLayer.insert(0, canvas)
     }
 
+    //border
+
     fun border(
-        charHorizontal: Char,
-        charVertical: Char,
-        charTopLeft: Char,
-        charTopRight: Char,
-        charBottomLeft: Char,
-        charBottomRight: Char
+        charHorizontal: Char = '#',
+        charVertical: Char = '#',
+        charTopLeft: Char = '#',
+        charTopRight: Char = '#',
+        charBottomLeft: Char = '#',
+        charBottomRight: Char = '#'
     ) {
         val border = Border(
             charHorizontal = charHorizontal,
@@ -45,12 +47,7 @@ class Column(
         )
     }
 
-    fun border() {
-        val border = Border()
-        layer.stringLayer.append(
-            border.buildHorizontalLine().content.toString()
-        )
-    }
+    //text
 
     fun text(
         textString: String,

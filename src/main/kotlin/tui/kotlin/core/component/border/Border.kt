@@ -20,36 +20,6 @@ internal class Border(
     val charBottomRight: Char,
 ) {
 
-    constructor(charLine: Char = '#') : this(
-
-        charHorizontal = charLine,
-
-        charVertical = charLine,
-
-        charTopLeft = charLine,
-
-        charTopRight = charLine,
-
-        charBottomLeft = charLine,
-
-        charBottomRight = charLine,
-    )
-
-    constructor() : this(
-
-        charHorizontal = '#',
-
-        charVertical = '#',
-
-        charTopLeft = '#',
-
-        charTopRight = '#',
-
-        charBottomLeft = '#',
-
-        charBottomRight = '#',
-    )
-
     fun buildHorizontalLine(): RawContent {
         val (rows, cols) = TermManager().getTerminalDimension()
 
@@ -71,7 +41,7 @@ internal class Border(
             showCursor()
         }
 
-        val horizontalLine = charTopLeft + charHorizontal.toString().repeat(cols - 2) + charTopLeft
+        val horizontalLine = charHorizontal.toString().repeat(cols)
 
         return RawContent()
             .add(cursorNavToUp.cursorInstruc)
@@ -82,6 +52,14 @@ internal class Border(
     }
 
     fun buildVerticalLine() {
+
+        val (rows, cols) = TermManager().getTerminalDimension()
+
+        val rawContent = RawContent()
+
+        /*for (line in rows) {
+            move 
+        }*/
 
     }
 

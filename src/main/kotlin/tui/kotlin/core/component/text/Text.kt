@@ -13,17 +13,17 @@ internal class Text(
 
     val offset: Offset,
 
-    val italic: Boolean = false,
+    val italic: Boolean,
 
-    val bold: Boolean = false,
+    val bold: Boolean,
 
-    val underLine: Boolean = false,
+    val underLine: Boolean,
 
-    val fgColor: Color = Color.WHITE,
+    val fgColor: Color,
 
-    val bgColor: Color = Color(0, 0, 0, 0),
+    val bgColor: Color,
 
-    val strikeThrough: Boolean = false
+    val strikeThrough: Boolean
 ) {
 
 
