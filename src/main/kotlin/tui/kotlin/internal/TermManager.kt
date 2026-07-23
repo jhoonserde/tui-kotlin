@@ -1,3 +1,6 @@
+package tui.kotlin
+
+import tui.kotlin.exception.TermManagerException
 import java.io.File
 
 class TermManager() {
@@ -28,7 +31,7 @@ class TermManager() {
             }
 
             if (dimensions.size != 2) {
-                throw TermManagerException("") 
+                throw TermManagerException("")
             }
         } catch (e: TermManagerException) {
             println("Failed to get dimensions of terminal")

@@ -1,6 +1,7 @@
-import TermManager
-import layout.Layout
-import layout.SBuilder
+package tui.kotlin
+
+import tui.kotlin.TermManager
+import tui.kotlin.layout.Layout
 
 class TuiManager() {
 
@@ -13,6 +14,6 @@ class TuiManager() {
         if (clearScreen) TermManager().clearScreen()
         if (buildCanvas) layout.canvas(' ')
 
-        println(layout.stringBuilder)
+        println(layout.layer.stringLayer)
     }
 }

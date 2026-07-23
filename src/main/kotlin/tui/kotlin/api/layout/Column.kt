@@ -1,44 +1,26 @@
-package layout
+package tui.kotlin.layout
 
-import ansi_escape.CursorNav
-import ansi_escape.TextStyle
+import tui.kotlin.TermManager
+import tui.kotlin.Layer
+import tui.kotlin.component.Text
+import tui.kotlin.layout.Layout
 import java.awt.Color
-import types.Offset
-import TermManager
-import builder.component.Text
-import builder.component.*
+import tui.kotlin.Offset
 
-class SBuilder(
+class Column(
 
-    override val stringBuilder: StringBuilder = StringBuilder(),
+    override val layer: Layer = Layer(),
 
     private val termManager: TermManager = TermManager(),
 
-    private val cursorNav: CursorNav = CursorNav()
-
 ) : Layout {
-
 
     override fun canvas(charCanvas: Char) {
 
         val (heigth, width) = termManager.getTerminalDimension()
 
         val canvas = charCanvas.toString().repeat(heigth.times(width))
-        stringBuilder.insert(0, canvas)
-    }
-
-
-    fun layout(type: SBuilder, content: (SBuilder) -> SBuilder) {
-        
-        val contentStringBuilder = content(type).stringBuilder
-        stringBuilder.append(contentStringBuilder)
-    }
-
-    fun border(charLine: Char = '#') {
-        val border = Border(charLine)
-        stringBuilder.append(
-            border.buildHorizontalLine()
-        )
+        layer.stringLayer.insert(0, canvas)
     }
 
     fun text(
@@ -60,7 +42,8 @@ class SBuilder(
             fgColor = fgColor,
             bgColor = bgColor,
             strikeThrough = strikeThrough
-        )
-        stringBuilder.append(text.buildText())
+        ).buildText()
+        layer.stringLayer.append(text.content)
     }
+
 }

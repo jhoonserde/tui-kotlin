@@ -1,8 +1,8 @@
 package layout
 
-import TermManager
-import types.Offset
-import ansi_escape.CursorNav
+import tui.kotlin.TermManager
+import tui.kotlin.Offset
+import tui.kotlin.navigation.Cursor
 
 class Border(
 
@@ -52,19 +52,19 @@ class Border(
     fun buildHorizontalLine(): String {
         val (rows, cols) = TermManager().getTerminalDimension()
 
-        val cursorNavToUp = CursorNav()
+        val cursorNavToUp = Cursor()
         cursorNavToUp.apply {
             saveCursor()
             hideCursor()
             moveTo(Offset(1, 1))
         }
 
-        val cursorNavToDown = CursorNav()
+        val cursorNavToDown = Cursor()
         cursorNavToDown.apply {
             moveTo(Offset(rows, 1))
         }
 
-        val cursorNavBack = CursorNav()
+        val cursorNavBack = Cursor()
         cursorNavBack.apply {
             restoreCursor()
             showCursor()

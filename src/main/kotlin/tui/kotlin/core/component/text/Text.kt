@@ -1,10 +1,11 @@
-package builder.component
+package tui.kotlin.component
 
-import ansi_escape.CursorNav
-import ansi_escape.TextStyle
+import tui.kotlin.navigation.Cursor
+import tui.kotlin.component.TextStyle
 import java.awt.Color
-import types.Offset
-import TermManager
+import tui.kotlin.Offset
+import tui.kotlin.TermManager
+import tui.kotlin.RawContent
 
 internal class Text(
 
@@ -26,16 +27,16 @@ internal class Text(
 ) {
 
 
-    fun buildText(): String {
+    fun buildText(): RawContent {
 
-        val navCursorToLine: CursorNav = CursorNav()
+        val navCursorToLine: Cursor = Cursor()
         navCursorToLine.apply {
             saveCursor()
             hideCursor()
             moveTo(offset)
         }
 
-        val navCursorBack: CursorNav = CursorNav()
+        val navCursorBack: Cursor = Cursor()
         navCursorBack.apply {
             restoreCursor()
             showCursor()
@@ -51,8 +52,9 @@ internal class Text(
             if (strikeThrough) strikeThrough()
         }
 
-        return navCursorToLine.cursorInstruc +
-            (textStyle.stylish + textString) +
-            navCursorBack.cursorInstruc
+        return RawContent()
+            .add(navCursorToLine.cursorInstruc)
+            .add(textStyle.stylish + textString)
+            .add(navCursorBack.cursorInstruc)
     }
 }

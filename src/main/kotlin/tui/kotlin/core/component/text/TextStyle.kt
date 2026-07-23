@@ -1,6 +1,7 @@
-package ansi_escape
+package tui.kotlin.component
 
 import java.awt.Color
+import tui.kotlin.AnsiEscape
 
 class TextStyle(private var _stylish: String = String()) {
 
