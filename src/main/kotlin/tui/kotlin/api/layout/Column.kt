@@ -3,6 +3,7 @@ package tui.kotlin.layout
 import tui.kotlin.TermManager
 import tui.kotlin.Layer
 import tui.kotlin.component.Text
+import tui.kotlin.component.Border
 import tui.kotlin.layout.Layout
 import java.awt.Color
 import tui.kotlin.Offset
@@ -21,6 +22,34 @@ class Column(
 
         val canvas = charCanvas.toString().repeat(heigth.times(width))
         layer.stringLayer.insert(0, canvas)
+    }
+
+    fun border(
+        charHorizontal: Char,
+        charVertical: Char,
+        charTopLeft: Char,
+        charTopRight: Char,
+        charBottomLeft: Char,
+        charBottomRight: Char
+    ) {
+        val border = Border(
+            charHorizontal = charHorizontal,
+            charVertical = charVertical,
+            charTopLeft = charTopLeft,
+            charTopRight = charTopRight,
+            charBottomLeft = charBottomLeft,
+            charBottomRight = charBottomRight,
+        )
+        layer.stringLayer.append(
+            border.buildHorizontalLine().content.toString()
+        )
+    }
+
+    fun border() {
+        val border = Border()
+        layer.stringLayer.append(
+            border.buildHorizontalLine().content.toString()
+        )
     }
 
     fun text(

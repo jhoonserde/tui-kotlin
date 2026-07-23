@@ -1,10 +1,11 @@
-package layout
+package tui.kotlin.component
 
 import tui.kotlin.TermManager
 import tui.kotlin.Offset
+import tui.kotlin.RawContent
 import tui.kotlin.navigation.Cursor
 
-class Border(
+internal class Border(
 
     val charHorizontal: Char,
 
@@ -49,7 +50,7 @@ class Border(
         charBottomRight = '#',
     )
 
-    fun buildHorizontalLine(): String {
+    fun buildHorizontalLine(): RawContent {
         val (rows, cols) = TermManager().getTerminalDimension()
 
         val cursorNavToUp = Cursor()
@@ -72,10 +73,12 @@ class Border(
 
         val horizontalLine = charTopLeft + charHorizontal.toString().repeat(cols - 2) + charTopLeft
 
-        return cursorNavToUp.cursorInstruc + 
-        horizontalLine + cursorNavToDown.cursorInstruc +
-        horizontalLine + cursorNavBack.cursorInstruc
-
+        return RawContent()
+            .add(cursorNavToUp.cursorInstruc)
+            .add(horizontalLine)
+            .add(cursorNavToDown.cursorInstruc)
+            .add(horizontalLine)
+            .add(cursorNavBack.cursorInstruc)
     }
 
     fun buildVerticalLine() {
