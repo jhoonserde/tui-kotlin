@@ -43,12 +43,13 @@ internal class Border(
 
         val horizontalLine = charHorizontal.toString().repeat(cols)
 
-        return RawContent()
-            .add(cursorNavToUp.cursorInstruc)
-            .add(horizontalLine)
-            .add(cursorNavToDown.cursorInstruc)
-            .add(horizontalLine)
-            .add(cursorNavBack.cursorInstruc)
+        return RawContent().apply {
+            add(cursorNavToUp.cursorInstruc)
+            add(horizontalLine)
+            add(cursorNavToDown.cursorInstruc)
+            add(horizontalLine)
+            add(cursorNavBack.cursorInstruc)
+        }
     }
 
     fun buildVerticalLine() {
@@ -58,7 +59,7 @@ internal class Border(
         val rawContent = RawContent()
 
         /*for (line in rows) {
-            move 
+            move
         }*/
 
     }

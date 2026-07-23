@@ -52,9 +52,10 @@ internal class Text(
             if (strikeThrough) strikeThrough()
         }
 
-        return RawContent()
-            .add(navCursorToLine.cursorInstruc)
-            .add(textStyle.stylish + textString)
-            .add(navCursorBack.cursorInstruc)
+        return RawContent().apply {
+            add(navCursorToLine.cursorInstruc)
+            add(textStyle.stylish + textString)
+            add(navCursorBack.cursorInstruc)
+        }
     }
 }
